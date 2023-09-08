@@ -1,0 +1,64 @@
+unit testing is a software testing technique that focuses on testing 
+indivisual units or components of a softwre 
+
+A unit refers to the smallest testable part of the system , such as function,
+method or class
+
+the goal of unit testing is to verify the correctness of these indivisual 
+unit in isolation, ensuring, that they work as intended.
+
+Python libraries for unit testing - pytest, unittest
+
+Benefit of unit testing :
+unit test help identify bugs or issues in the early stages of development, 
+making it esier and less costly to fix them.
+
+Which module Django use for unit testing:
+The testing framework in Django is based on the python unitest module, which is 
+part of the python library
+
+How unit test performs in Django:
+
+0. In django, the python manage.py test command is used to run tests for your Django
+project. It is a management command that triggers the test runner provide by Django.
+
+1. Django looks for a file/package named tests within your project directory. This 
+package typically contains python files with names starting test_ or ending 
+with _test, as per Django's default test discovery rules. 
+
+2. Django collect all the test cases from the test folder and subfolder.Test cases 
+are defined as a subclass of the django.test.TestCase class or any test cases related 
+classes provided by the django.
+
+3. Django set up a test environment for running the test. It creates a seperate 
+database, often referred to as the test database, to isolate the test data from 
+your production database. It also applies migrations to the test database to provide a 
+consistent starting point for the test.
+
+4. during the test execution, Django provides various assertion methos 
+(eg: assertEqual, assertTrue) that you can use to verify the expected behaviour 
+of your code.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
