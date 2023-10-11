@@ -7,5 +7,7 @@ urlpatterns = [
     path('stuinfo/<int:pk>', views.student_List),
     path('stuinfo/', views.student_details),
     path('stuinfo1/', views.student_create),
+    path('crudapi/', views.CRUD_api), #CRUD functionality urls
+
 
 ]

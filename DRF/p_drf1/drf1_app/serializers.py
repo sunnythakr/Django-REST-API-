@@ -13,3 +13,9 @@ class StudentDeserializer(serializers.Serializer):
 from .models import Student
 def create(self, validate_data):
     return Student.objects.create(**validate_data)
+
+# CRUD functionality 
+class CRUDSerializer(serializers.Serializer):
+    name =serializers.CharField(max_length=100)
+    roll = serializers.IntegerField()
+    city = serializers.CharField(max_length=100)

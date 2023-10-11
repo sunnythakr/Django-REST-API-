@@ -41,3 +41,21 @@ def student_create(request):
         json_data = JSONRenderer().render(serializer.errors)
         return HttpResponse(json_data, content='application/json')
 
+# CRUD functionality 
+import io
+from .serializers import CRUDSerializer
+def CRUD_api(request):
+    if request.method == "GET":
+        json_data = request.body
+        stream = io.BytesIO(json_data)
+        pythondata = JSONParser().parse(stream)
+        id = pythondata.get('id',None)
+        if id is not None:
+            stu = Student.objects.get(id=id)
+            serializer = CRUDSerializer(stu)
+            json_data = JSONRenderer().render(serializer.data)
+            return HttpResponse(json_data, content='application/json')
+
+        stu = Student.objects.all()
+        serializer = CRUDSerializer().render(serializer.data)
+        return HttpResponse(json_data,content='application/json')
