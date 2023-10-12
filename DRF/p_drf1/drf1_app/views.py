@@ -58,4 +58,4 @@ def CRUD_api(request):
 
         stu = Student.objects.all()
         serializer = CRUDSerializer().render(serializer.data)
-        return HttpResponse(json_data,content='application/json')
+        return HttpResponse(json_data,content='application/json')   
