@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from .models import Student
 from .serializers import StudentSerializer
 import requests
-
+from rest_framework.views import APIView
 # Create your views here.
 
 '''
@@ -13,7 +13,7 @@ def hello_world(request):
     return Response({'msg': 'hello world'})
  '''
 @api_view(['GET'])
-def hello_world(request):
+def hello_worlds(request):
     return Response({'msg': 'hello world'})
 
 @api_view(['POST'])
@@ -22,10 +22,9 @@ def hello_world(request):
         print(request.data)
         return Response({'msg': 'This is Post Request'})
 
-@api_view(['GET','POST','PUT','PATCH', "DELETE"])
-def student_api(request, pk = None):
-    if request.method == 'GET':
-        id = request.data.get('id')
+class StudentAPI(APIView):
+    def get(self, request, format = None, pk = None):
+        id = pk
         if id is not None:
             stu = Student.objects.get(id = id)
             serializer = StudentSerializer(stu)
@@ -33,28 +32,33 @@ def student_api(request, pk = None):
         stu = Student.objects.all()
         serializer = StudentSerializer(stu, many = True)
         return Response(serializer.data)
-    if request.method == 'POST':
+
+    def post(self,request, format = None, pk = None ):
         serializer = StudentSerializer(data = request.data)
         if serializer.is_valid():
             serializer.save()
             return Response({'msg':'Data Created'})
         return Response(serializer.errors)
-    
-    if request.method =='PUT':
+
+    def put(self, request, pk, format = None):
         id = request.data.get('id')
         stu = Student.objects.get(pk=id)
         serializer = StudentSerializer(stu, data=request.data,
         partial = True)
         if serializer.is_valid():
             serializer.save()
-        return Response({'msg':'Data Updated'})
-    return Response(serializer.errors)
+            return Response({'msg':'Data Updated'})
+        return Response(serializer.errors)
 
-    if request.methodv == "DELETE":
+    def delete(self, request, format = None, pk = None):
         id = request.data.get('id')
         stu = Student.objects.get(pk=id)
         stu.delete()
         return Response({'msg':'Data Deleted'})
+
+@api_view(['GET','POST','PUT','PATCH', "DELETE"])
+def student_api(request, pk = None):
+    
 
 
 
