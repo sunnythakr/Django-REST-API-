@@ -17,3 +17,16 @@ class StudentViewSet(viewsets.ViewSet):
         if id is not None:
             stu = Student.objects.get(id =id)
             serializer = StudentSerializer(stu)
+            return Response(serializer.data)
+
+    def create(self, request):
+        serializer = StudentSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def update(self, request, pk):
+        id = pk
+        stu = Student.objects.get(pk=pk)
+        stu.delete()
+        return Response({'msg':'Data Created'})
