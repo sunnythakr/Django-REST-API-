@@ -13,10 +13,13 @@ class EmployeeModelViewSet(viewsets.ModelViewSet):
     serializer_class = EmployeeSerializer
 
 # ReadOnlyModelViewSet
-
+from rest_framework.authentication import BasicAuthentication # import authentication library 
+from rest_framework.permissions import IsAuthenticated # import authentication library 
 class EmployeeReadOnlyModelViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
+    authentication_classes = [BasicAuthentication] # authentication class
+    permission_classes = [IsAuthenticated]
 
 
 
